@@ -27,10 +27,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<BookDto> findById(Long id) {
-        Book book = bookRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Can't find book with id: " + id)
-        );
-        return Optional.ofNullable(bookMapper.toDto(book));
+        return bookRepository.findById(id)
+                .map(bookMapper::toDto)
+                .map(Optional::of)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find book with id: " + id));
     }
 
     @Override
