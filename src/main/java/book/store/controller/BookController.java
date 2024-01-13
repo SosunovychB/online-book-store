@@ -2,7 +2,6 @@ package book.store.controller;
 
 import book.store.dto.BookDto;
 import book.store.dto.CreateBookRequestDto;
-import book.store.exception.EntityNotFoundException;
 import book.store.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +25,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public BookDto getBookById(@PathVariable Long id) {
-        return bookService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Can't find book with id: " + id)
-        );
+        return bookService.findById(id);
     }
 
     @PostMapping
