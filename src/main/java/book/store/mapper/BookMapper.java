@@ -4,7 +4,8 @@ import book.store.config.MapperConfig;
 import book.store.dto.BookDto;
 import book.store.dto.CreateBookRequestDto;
 import book.store.model.Book;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(config = MapperConfig.class)
 public interface BookMapper {
