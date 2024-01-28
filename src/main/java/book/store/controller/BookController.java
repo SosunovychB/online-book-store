@@ -1,8 +1,8 @@
 package book.store.controller;
 
-import book.store.dto.BookDto;
-import book.store.dto.BookSearchParametersDto;
-import book.store.dto.CreateBookRequestDto;
+import book.store.dto.book.BookDto;
+import book.store.dto.book.BookSearchParametersDto;
+import book.store.dto.book.CreateBookRequestDto;
 import book.store.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Book management", description = "Endpoints for managing books")
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("api/books")
+@RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
 
