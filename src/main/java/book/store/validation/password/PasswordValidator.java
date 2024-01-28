@@ -3,8 +3,7 @@ package book.store.validation.password;
 import book.store.dto.user.UserRegistrationRequestDto;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
-import java.util.*;
+import java.util.Objects;
 
 public class PasswordValidator
         implements ConstraintValidator<PasswordMatch, UserRegistrationRequestDto> {
