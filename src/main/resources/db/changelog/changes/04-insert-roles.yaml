@@ -8,10 +8,10 @@ databaseChangeLog:
           columns:
             - column:
                 name: role_name
-                value: "ADMIN"
+                value: "ROLE_USER"
       - insert:
           tableName: roles
           columns:
             - column:
                 name: role_name
-                value: "USER"
+                value: "ROLE_ADMIN"

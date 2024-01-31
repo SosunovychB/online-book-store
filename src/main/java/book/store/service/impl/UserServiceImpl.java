@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private static final Long USER_ROLE_ID = 2L;
+    private static final Long USER_ROLE_ID = 1L;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final SecurityConfig securityConfig;
@@ -28,12 +28,9 @@ public class UserServiceImpl implements UserService {
             throw new RegistrationException("User with the email "
                     + userRegistrationRequestDto.getEmail() + " already exists. Use another one.");
         }
-        User user = new User();
-        user.setEmail(userRegistrationRequestDto.getEmail());
+        User user = userMapper.toModel(userRegistrationRequestDto);
         user.setPassword(securityConfig.getpasswordEncoder()
                 .encode(userRegistrationRequestDto.getPassword()));
-        user.setFirstName(userRegistrationRequestDto.getFirstName());
-        user.setLastName(userRegistrationRequestDto.getLastName());
         user.getRoles().add(roleRepository.getReferenceById(USER_ROLE_ID));
         User savedUser = userRepository.save(user);
         return userMapper.toUserResponseDto(savedUser);

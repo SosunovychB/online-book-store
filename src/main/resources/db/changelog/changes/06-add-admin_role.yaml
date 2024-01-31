@@ -4,7 +4,14 @@ databaseChangeLog:
       author: Sosunovych_Bohdan
       changes:
         - insert:
+              tableName: users
+              columns:
+                - column: { name: email, value: "bob.admin@gmail.com" }
+                - column: { name: password, value: "$2a$10$PRefY./T5qn3s3OUP74i2elShTiSLKmjAsObSl7N0ccf7sXQc6Xsm" }
+                - column: { name: first_name, value: "Bob" }
+                - column: { name: last_name, value: "Bobson"}
+        - insert:
             tableName: users_roles
             columns:
-              - column: {name: user_id, value: 1}
-              - column: {name: role_id, value: 1}
+              - column: { name: user_id, value: 1 }
+              - column: { name: role_id, value: 2 }
