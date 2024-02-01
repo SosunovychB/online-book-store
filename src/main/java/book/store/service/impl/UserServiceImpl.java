@@ -5,6 +5,7 @@ import book.store.dto.user.UserRegistrationRequestDto;
 import book.store.dto.user.UserResponseDto;
 import book.store.exception.RegistrationException;
 import book.store.mapper.UserMapper;
+import book.store.model.Role;
 import book.store.model.User;
 import book.store.repository.role.RoleRepository;
 import book.store.repository.user.UserRepository;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private static final Long USER_ROLE_ID = 1L;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final SecurityConfig securityConfig;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toModel(userRegistrationRequestDto);
         user.setPassword(securityConfig.getpasswordEncoder()
                 .encode(userRegistrationRequestDto.getPassword()));
-        user.getRoles().add(roleRepository.getReferenceById(USER_ROLE_ID));
+        user.getRoles().add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
         User savedUser = userRepository.save(user);
         return userMapper.toUserResponseDto(savedUser);
     }
