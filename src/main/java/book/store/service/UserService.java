@@ -1,10 +1,10 @@
 package book.store.service;
 
 import book.store.dto.user.UserRegistrationRequestDto;
-import book.store.dto.user.UserResponseDto;
+import book.store.dto.user.UserRegistrationResponseDto;
 import book.store.exception.RegistrationException;
 
 public interface UserService {
-    UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
+    UserRegistrationResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
             throws RegistrationException;
 }
