@@ -2,7 +2,7 @@ package book.store.mapper;
 
 import book.store.config.MapperConfig;
 import book.store.dto.user.UserRegistrationRequestDto;
-import book.store.dto.user.UserResponseDto;
+import book.store.dto.user.UserRegistrationResponseDto;
 import book.store.model.User;
 import org.mapstruct.Mapper;
 
@@ -10,5 +10,5 @@ import org.mapstruct.Mapper;
 public interface UserMapper {
     User toModel(UserRegistrationRequestDto userRegistrationRequestDto);
 
-    UserResponseDto toUserResponseDto(User user);
+    UserRegistrationResponseDto toUserResponseDto(User user);
 }

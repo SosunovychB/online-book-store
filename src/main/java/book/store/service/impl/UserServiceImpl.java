@@ -2,7 +2,7 @@ package book.store.service.impl;
 
 import book.store.config.SecurityConfig;
 import book.store.dto.user.UserRegistrationRequestDto;
-import book.store.dto.user.UserResponseDto;
+import book.store.dto.user.UserRegistrationResponseDto;
 import book.store.exception.RegistrationException;
 import book.store.mapper.UserMapper;
 import book.store.model.Role;
@@ -22,14 +22,14 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
-            throws RegistrationException {
+    public UserRegistrationResponseDto register(
+            UserRegistrationRequestDto userRegistrationRequestDto) throws RegistrationException {
         if (userRepository.findByEmail(userRegistrationRequestDto.getEmail()).isPresent()) {
             throw new RegistrationException("User with the email "
                     + userRegistrationRequestDto.getEmail() + " already exists. Use another one.");
         }
         User user = userMapper.toModel(userRegistrationRequestDto);
-        user.setPassword(securityConfig.getpasswordEncoder()
+        user.setPassword(securityConfig.getPasswordEncoder()
                 .encode(userRegistrationRequestDto.getPassword()));
         user.getRoles().add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
         User savedUser = userRepository.save(user);
