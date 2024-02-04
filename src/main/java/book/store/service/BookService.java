@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {
-    List<BookDto> search(BookSearchParametersDto searchParameters);
+    List<BookDtoWithoutCategoryIds> search(BookSearchParametersDto searchParameters);
 
     BookDto save(CreateBookRequestDto requestDto);
 
