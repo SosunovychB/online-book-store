@@ -1,6 +1,7 @@
 package book.store.controller;
 
 import book.store.dto.book.BookDto;
+import book.store.dto.book.BookDtoWithoutCategoryIds;
 import book.store.dto.book.BookSearchParametersDto;
 import book.store.dto.book.CreateBookRequestDto;
 import book.store.service.BookService;
@@ -31,35 +32,40 @@ public class BookController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping
-    @Operation(summary = "Get all books in pages", description = "Get all available books in pages")
+    @Operation(summary = "Get all books in pages",
+            description = "Get all available books in pages")
     public List<BookDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
-    @Operation(summary = "Search books by params", description = "Search books by params")
-    public List<BookDto> searchBooks(BookSearchParametersDto searchParameters) {
+    @Operation(summary = "Search books by params",
+            description = "Search books by params")
+    public List<BookDtoWithoutCategoryIds> searchBooks(BookSearchParametersDto searchParameters) {
         return bookService.search(searchParameters);
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
-    @Operation(summary = "Get a book by id", description = "Get a book by id")
+    @Operation(summary = "Get a book by id",
+            description = "Get a book by id")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.findById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    @Operation(summary = "Create a new book", description = "Create a new book")
+    @Operation(summary = "Create a new book",
+            description = "Create a new book")
     public BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    @Operation(summary = "Update a book by id", description = "Update a book by id")
+    @Operation(summary = "Update a book by id",
+            description = "Update a book by id")
     public BookDto updateBookDetails(@PathVariable Long id,
                                      @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.updateBookById(id, requestDto);
@@ -68,7 +74,8 @@ public class BookController {
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a book by id", description = "Delete a book by id")
+    @Operation(summary = "Delete a book by id",
+            description = "Delete a book by id")
     public void deleteBookById(@PathVariable Long id) {
         bookService.deleteById(id);
     }
