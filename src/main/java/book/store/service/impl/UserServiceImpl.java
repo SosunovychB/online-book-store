@@ -6,8 +6,10 @@ import book.store.dto.user.UserRegistrationResponseDto;
 import book.store.exception.RegistrationException;
 import book.store.mapper.UserMapper;
 import book.store.model.Role;
+import book.store.model.ShoppingCart;
 import book.store.model.User;
 import book.store.repository.role.RoleRepository;
+import book.store.repository.shopping.cart.ShoppingCartRepository;
 import book.store.repository.user.UserRepository;
 import book.store.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final SecurityConfig securityConfig;
     private final RoleRepository roleRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
     public UserRegistrationResponseDto register(
@@ -33,6 +36,11 @@ public class UserServiceImpl implements UserService {
                 .encode(userRegistrationRequestDto.getPassword()));
         user.getRoles().add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
         User savedUser = userRepository.save(user);
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUser(savedUser);
+        shoppingCartRepository.save(shoppingCart);
+
         return userMapper.toUserResponseDto(savedUser);
     }
 }
