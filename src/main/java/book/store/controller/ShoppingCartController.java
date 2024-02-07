@@ -1,6 +1,5 @@
 package book.store.controller;
 
-import book.store.dto.cart.item.CartItemDto;
 import book.store.dto.shopping.cart.AddBookToShoppingCartRequestDto;
 import book.store.dto.shopping.cart.ShoppingCartDto;
 import book.store.dto.shopping.cart.UpdateBookQuantityRequestDto;
@@ -61,10 +60,10 @@ public class ShoppingCartController {
     @PutMapping("/cart-items/{cartItemId}")
     @Operation(summary = "Update quantity of a book in the shopping cart",
             description = "Update quantity of a book in the shopping cart")
-    public CartItemDto updateItemQuantity(@PathVariable Long cartItemId,
+    public ShoppingCartDto updateItemQuantity(@PathVariable Long cartItemId,
                                           @RequestBody @Valid
                                           UpdateBookQuantityRequestDto requestDto) {
-        return cartItemService.updateBookQuantityInCartItem(cartItemId, requestDto);
+        return shoppingCartService.updateBookQuantityInCartItem(cartItemId, requestDto);
     }
 
     @PreAuthorize("hasRole('USER')")

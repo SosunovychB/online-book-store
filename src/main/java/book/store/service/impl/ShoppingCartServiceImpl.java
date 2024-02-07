@@ -2,6 +2,7 @@ package book.store.service.impl;
 
 import book.store.dto.shopping.cart.AddBookToShoppingCartRequestDto;
 import book.store.dto.shopping.cart.ShoppingCartDto;
+import book.store.dto.shopping.cart.UpdateBookQuantityRequestDto;
 import book.store.exception.EntityNotFoundException;
 import book.store.exception.ItemIsAlreadyInCartException;
 import book.store.mapper.ShoppingCartMapper;
@@ -46,6 +47,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.getCartItems().add(savedNewCartItem);
         ShoppingCart savedShoppingCart = shoppingCartRepository.save(shoppingCart);
         return shoppingCartMapper.toDto(savedShoppingCart);
+    }
+
+    @Override
+    public ShoppingCartDto updateBookQuantityInCartItem(Long cartItemId,
+                                                    UpdateBookQuantityRequestDto updateRequestDto) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
+                () -> new EntityNotFoundException("Can't find cart item with id " + cartItemId)
+        );
+        cartItem.setQuantity(updateRequestDto.getQuantity());
+        CartItem savedCartItem = cartItemRepository.save(cartItem);
+        ShoppingCart updatedShoppingCart = shoppingCartRepository
+                .findShoppingCartByUserId(savedCartItem.getShoppingCart().getUser().getId());
+        return shoppingCartMapper.toDto(updatedShoppingCart);
     }
 
     private ShoppingCart findShoppingCartByUserEmail(String userEmail) {
