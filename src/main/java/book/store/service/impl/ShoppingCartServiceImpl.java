@@ -9,8 +9,8 @@ import book.store.mapper.ShoppingCartMapper;
 import book.store.model.CartItem;
 import book.store.model.ShoppingCart;
 import book.store.repository.book.BookRepository;
-import book.store.repository.cart.item.CartItemRepository;
 import book.store.repository.shopping.cart.ShoppingCartRepository;
+import book.store.repository.shopping.cart.item.CartItemRepository;
 import book.store.repository.user.UserRepository;
 import book.store.service.ShoppingCartService;
 import jakarta.transaction.Transactional;
@@ -57,8 +57,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         );
         cartItem.setQuantity(updateRequestDto.getQuantity());
         CartItem savedCartItem = cartItemRepository.save(cartItem);
-        ShoppingCart updatedShoppingCart = shoppingCartRepository
-                .findShoppingCartByUserId(savedCartItem.getShoppingCart().getUser().getId());
+        Long userId = savedCartItem.getShoppingCart().getUser().getId();
+        ShoppingCart updatedShoppingCart = shoppingCartRepository.findShoppingCartByUserId(userId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find shopping cart for user with id " + userId));
         return shoppingCartMapper.toDto(updatedShoppingCart);
     }
 
@@ -66,7 +68,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Long userId = userRepository.findByEmail(userEmail).orElseThrow(
                 () -> new EntityNotFoundException("Can't find user with email " + userEmail)
         ).getId();
-        return shoppingCartRepository.findShoppingCartByUserId(userId);
+        return shoppingCartRepository.findShoppingCartByUserId(userId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find shopping cart for user with id " + userId));
     }
 
     private void checkIfBookIsInTheCart(ShoppingCart shoppingCart,
