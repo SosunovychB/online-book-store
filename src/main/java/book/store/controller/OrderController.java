@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,17 +35,18 @@ public class OrderController {
     @GetMapping
     @Operation(summary = "Retrieve user's order history",
             description = "Retrieve user's order history")
-    public List<OrderDto> getAllOrders(Pageable pageable) {
-        Long userId = getAuthenticatedUser().getId();
-        return orderService.getAllOrders(pageable, userId);
+    public List<OrderDto> getAllOrders(Authentication authentication, Pageable pageable) {
+        User user = (User) authentication.getPrincipal();
+        return orderService.getAllOrders(pageable, user.getId());
     }
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping
     @Operation(summary = "Place an order",
             description = "Place an order")
-    public OrderDto placeOrder(@RequestBody @Valid PlaceOrderRequestDto requestDto) {
-        User user = getAuthenticatedUser();
+    public OrderDto placeOrder(Authentication authentication,
+                               @RequestBody @Valid PlaceOrderRequestDto requestDto) {
+        User user = (User) authentication.getPrincipal();
         return orderService.placeOrder(user, requestDto);
     }
 
@@ -73,10 +73,5 @@ public class OrderController {
     public OrderDto updateOrderStatus(@PathVariable Long orderId,
             @RequestBody @Valid UpdateOrderStatusRequestDto requestDto) {
         return orderService.updateOrderStatus(orderId, requestDto);
-    }
-
-    private User getAuthenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (User) authentication.getPrincipal();
     }
 }
