@@ -1,7 +1,7 @@
 package book.store.mapper;
 
 import book.store.config.MapperConfig;
-import book.store.dto.cart.item.CartItemDto;
+import book.store.dto.shopping.cart.item.CartItemDto;
 import book.store.model.CartItem;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,8 +15,8 @@ public interface CartItemMapper {
     @Mapping(source = "book.title", target = "bookTitle")
     CartItemDto toCartItemDto(CartItem cartItem);
 
-    @Named(value = "mapCartItems")
-    default Set<CartItemDto> mapCartItems(Set<CartItem> cartItems) {
+    @Named(value = "toCartItemDtoSet")
+    default Set<CartItemDto> toCartItemDtoSet(Set<CartItem> cartItems) {
         return cartItems.stream()
                 .map(this::toCartItemDto)
                 .collect(Collectors.toSet());

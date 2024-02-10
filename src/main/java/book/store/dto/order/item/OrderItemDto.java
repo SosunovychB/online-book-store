@@ -1,11 +1,10 @@
-package book.store.dto.cart.item;
+package book.store.dto.order.item;
 
 import lombok.Data;
 
 @Data
-public class CartItemDto {
+public class OrderItemDto {
     private Long id;
     private Long bookId;
-    private String bookTitle;
     private int quantity;
 }
