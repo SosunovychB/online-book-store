@@ -12,8 +12,10 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -21,8 +23,10 @@ import org.hibernate.annotations.SQLRestriction;
 @Table(name = "books")
 @Getter
 @Setter
+@EqualsAndHashCode
 @SQLDelete(sql = "UPDATE books SET is_deleted = true WHERE id = ?")
 @SQLRestriction("is_deleted = false")
+@Accessors(chain = true)
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +42,7 @@ public class Book {
     private String description;
     @Column(name = "cover_image")
     private String coverImage;
+    @EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(
             name = "books_categories",
