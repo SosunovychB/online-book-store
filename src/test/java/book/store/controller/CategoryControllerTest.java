@@ -111,8 +111,8 @@ public class CategoryControllerTest {
                 .setDescription("Description for Category 2");
 
         //when
-        MvcResult result = mockMvc.perform(get("/api/categories/{id}", categoryId)
-                )
+        MvcResult result = mockMvc
+                .perform(get("/api/categories/{id}", categoryId))
                 .andExpect(status().isOk())
                 .andReturn();
 
