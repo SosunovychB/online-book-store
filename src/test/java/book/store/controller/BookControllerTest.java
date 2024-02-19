@@ -68,7 +68,7 @@ public class BookControllerTest {
             ScriptUtils.executeSqlScript(
                     connection,
                     new ClassPathResource(
-                            "database/books/add-books-to-books-table.sql"));
+                            "database/book/add-books-to-books-table.sql"));
         } catch (SQLException e) {
             throw new RuntimeException("Error creating up database", e);
         }
@@ -266,7 +266,7 @@ public class BookControllerTest {
             ScriptUtils.executeSqlScript(
                     connection,
                     new ClassPathResource(
-                            "database/books/delete-books-from-books-table.sql"));
+                            "database/book/delete-books-from-books-table.sql"));
         } catch (SQLException e) {
             throw new RuntimeException("Error cleaning up database", e);
         }
