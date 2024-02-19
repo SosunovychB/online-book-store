@@ -133,7 +133,7 @@ public class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/add-books-to-books-table.sql")
+                    new ClassPathResource("database/book/add-books-to-books-table.sql")
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error creating up database", e);
@@ -160,7 +160,7 @@ public class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/books/delete-books-from-books-table.sql")
+                    new ClassPathResource("database/book/delete-books-from-books-table.sql")
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error creating up database", e);

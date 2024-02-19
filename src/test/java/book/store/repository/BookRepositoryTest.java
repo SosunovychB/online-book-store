@@ -23,10 +23,10 @@ import org.springframework.test.context.jdbc.Sql;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(scripts = {"classpath:database/categories/add-categories-to-categories-table.sql",
-        "classpath:database/books/add-books-to-books-table.sql"},
+        "classpath:database/book/add-books-to-books-table.sql"},
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @Sql(scripts = {"classpath:database/categories/delete-categories-from-categories-table.sql",
-        "classpath:database/books/delete-books-from-books-table.sql"},
+        "classpath:database/book/delete-books-from-books-table.sql"},
         executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 public class BookRepositoryTest {
     @Autowired
