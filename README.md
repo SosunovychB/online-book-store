@@ -115,6 +115,7 @@ This is back-end part of application developed on Java.
 - DEBUG_PORT
 - JWT_EXPIRATION
 - JWT_SECRET
-![Screenshot 2024-02-23 at 17.35.22.png](..%2F..%2FScreenshot%202024-02-23%20at%2017.35.22.png)
+- Example:
+![img_1.png](img_1.png)
 4. Run Docker Desktop.
 5. Run command "docker-compose up" in Terminal in your IDE.
