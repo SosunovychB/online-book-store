@@ -100,3 +100,21 @@ This is back-end part of application developed on Java.
 - All users registered through the common available endpoint POST: /api/auth/register will have the default role USER.
 13. Tests were written using Testcontainers for repository-level, Mockito for service-level, and MockMvc for controller-level.
 14. Finally, Docker was integrated for easy application deployment.
+####     TO START LOCALLY THIS APPLICATION YOU MUST:
+1. Fetch this project to you local IDE.
+2. Open this project in your IDE.
+3. Create in the root directory .env file and set-up following variables:
+- MYSQL_ROOT_PASSWORD
+- MYSQL_USER
+- MYSQL_PASSWORD
+- MYSQL_DATABASE
+- MYSQL_LOCAL_PORT
+- MYSQL_DOCKER_PORT
+- SPRING_LOCAL_PORT
+- SPRING_DOCKER_PORT
+- DEBUG_PORT
+- JWT_EXPIRATION
+- JWT_SECRET
+![Screenshot 2024-02-23 at 17.35.22.png](..%2F..%2FScreenshot%202024-02-23%20at%2017.35.22.png)
+4. Run Docker Desktop.
+5. Run command "docker-compose up" in Terminal in your IDE.
