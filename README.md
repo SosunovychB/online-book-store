@@ -4,6 +4,9 @@ The Online Book Store application is a platform designed to facilitate the buyin
 
 This is back-end part of application developed on Java.
 
+### **KEY TECHNOLOGIES:**
+Spring Data, Spring Boot Web (RESTful API), Spring Boot Security, Spring Boot Testing, Hibernate, MySQL, Liquibase, Docker.
+
 ### **GENERAL INFO**
 **In this app we will have the following domain models (entities):**
 - **User:** Contains information about the registered user including their authentication details and personal information.
@@ -83,7 +86,7 @@ This is back-end part of application developed on Java.
 - DELETE: /api/categories/{id}
 - PATCH: /api/orders/{id}
 
-### KEY TECHNOLOGIES
+### KEY TECHNOLOGIES (more details)
 1. Language: Java. Build System: Maven (with pom.xml file).
 2. The app was created using SOLID principles and follows the Controller - Service - Repository architecture with REST software architectural style for APIs.
 3. Security was implemented using Spring Boot Security with Bearer authorization using JWT tokens.
