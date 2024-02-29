@@ -109,7 +109,7 @@ This is back-end part of application developed on Java.
 10. Pagination and Swagger were integrated for specific requests.
 11. All endpoints were documented using Swagger.
 12. Liquibase was used as a database schema change management solution.
-- The default user is admin@gmail.com with the password bob.admin and the role ADMIN.
+- The default user is "admin@gmail.com" with the password "bob.admin" and the role ADMIN.
 - All users registered through the common available endpoint POST: /api/auth/register will have the default role USER.
 13. Tests were written using Testcontainers for repository-level, Mockito for service-level, and MockMvc for controller-level.
 14. Finally, Docker was integrated for easy application deployment.
