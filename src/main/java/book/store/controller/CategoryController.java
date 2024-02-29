@@ -6,6 +6,7 @@ import book.store.dto.category.CreateCategoryRequestDto;
 import book.store.service.BookService;
 import book.store.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Categories management", description = "Endpoints for managing categories")
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {

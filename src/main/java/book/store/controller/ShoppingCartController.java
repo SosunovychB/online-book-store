@@ -7,6 +7,7 @@ import book.store.model.User;
 import book.store.service.CartItemService;
 import book.store.service.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Shopping cart management",
         description = "Endpoints for management of user's shopping cart")
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
 public class ShoppingCartController {

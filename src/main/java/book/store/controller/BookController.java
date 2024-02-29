@@ -6,6 +6,7 @@ import book.store.dto.book.BookSearchParametersDto;
 import book.store.dto.book.CreateBookRequestDto;
 import book.store.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Book management", description = "Endpoints for managing books")
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("api/books")
 @RequiredArgsConstructor
 public class BookController {
