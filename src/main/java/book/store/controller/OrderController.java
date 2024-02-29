@@ -8,6 +8,7 @@ import book.store.model.User;
 import book.store.service.OrderItemService;
 import book.store.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Orders management", description = "Endpoints for orders management")
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
 public class OrderController {
