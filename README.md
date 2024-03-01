@@ -8,13 +8,15 @@ This is back-end part of application developed on Java.
 - Java 17
 - Maven
 - Docker
-- Spring Data
+- Swagger
+- Spring Data (version 3.2.1; is common for all Spring tools from Spring framework 3.2.1)
 - Spring Boot Web (RESTful API)
 - Spring Boot Security
 - Spring Boot Testing (JUnit, Mockito, MockMvc, Testcontainers)
 - Lombok
+- MapStruct
 - Hibernate
-- MySQL
+- MySQL (version 8.0.33)
 - Liquibase
 
 ### **GENERAL INFO**
@@ -109,7 +111,7 @@ This is back-end part of application developed on Java.
 10. Pagination and Swagger were integrated for specific requests.
 11. All endpoints were documented using Swagger.
 12. Liquibase was used as a database schema change management solution.
-- The default user is admin@gmail.com with the password bob.admin and the role ADMIN.
+- The default user is "admin@gmail.com" with the password "bob.admin" and the role ADMIN.
 - All users registered through the common available endpoint POST: /api/auth/register will have the default role USER.
 13. Tests were written using Testcontainers for repository-level, Mockito for service-level, and MockMvc for controller-level.
 14. Finally, Docker was integrated for easy application deployment.
@@ -132,3 +134,5 @@ This is back-end part of application developed on Java.
 ![img_1.png](img_1.png)
 4. Run Docker Desktop.
 5. Run command "docker-compose up" in Terminal in your IDE.
+
+### You can also check [this link](https://www.loom.com/share/655d1ac4f7d542daa94c92eb4cd127c0?sid=8564fd24-2b53-4839-9bc2-d99c8ec447a6) to see short video how it works.
