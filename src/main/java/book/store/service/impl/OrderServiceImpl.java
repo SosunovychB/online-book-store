@@ -1,5 +1,6 @@
 package book.store.service.impl;
 
+import book.store.dto.audit.OrderDtoForAudit;
 import book.store.dto.order.OrderDto;
 import book.store.dto.order.PlaceOrderRequestDto;
 import book.store.dto.order.UpdateOrderStatusRequestDto;
@@ -7,12 +8,14 @@ import book.store.exception.EntityNotFoundException;
 import book.store.mapper.OrderMapper;
 import book.store.model.CartItem;
 import book.store.model.Order;
+import book.store.model.OrderAuditInfo;
 import book.store.model.OrderItem;
 import book.store.model.ShoppingCart;
 import book.store.model.User;
 import book.store.repository.order.OrderRepository;
 import book.store.repository.shopping.cart.ShoppingCartRepository;
 import book.store.repository.shopping.cart.item.CartItemRepository;
+import book.store.service.AuditService;
 import book.store.service.OrderService;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+    private final AuditService auditService;
     private final OrderRepository orderRepository;
     private final ShoppingCartRepository shoppingCartRepository;
     private final CartItemRepository cartItemRepository;
@@ -47,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal totalPrice = calculateTotalPrice(orderItems);
         String shippingAddress = requestDto.getShippingAddress();
         Order savedOrder = createOrder(user, orderItems, totalPrice, shippingAddress);
+        // audit action
+        doOrderAuditAction(savedOrder);
+        //end of audit action
         return orderMapper.toDto(savedOrder);
     }
 
@@ -113,5 +120,24 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderItems(orderItems);
 
         return orderRepository.save(order);
+    }
+
+    // Audit action
+    private void doOrderAuditAction(Order order) {
+        OrderDtoForAudit auditOrder = OrderDtoForAudit.builder()
+                .orderId(order.getId())
+                .userId(order.getUser().getId())
+                .status(order.getStatus())
+                .total(order.getTotal())
+                .orderDate(order.getOrderDate())
+                .shippingAddress(order.getShippingAddress())
+                .build();
+
+        auditService.saveOrderAudit(OrderAuditInfo.builder()
+                .userId(order.getUser().getId())
+                .order(auditOrder)
+                .timestamp(LocalDateTime.now())
+                .build()
+        );
     }
 }
